@@ -1,0 +1,206 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-post-container {
+    background-color: rgb(39, 38, 46);
+    padding: 15px;
+    width: 30vw;
+    margin: 20px;
+    border-radius: 16px;
+    position: relative;
+    padding-bottom: 50px;
+    box-shadow: 0 3px 7px black;
+    min-width: 300px;
+}
+
+.create-post-container h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+form textarea {
+    font-size: 1rem;
+    resize: none;
+    width: 28vw;
+    height: 12vh;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    background-color: rgb(63, 67, 90);
+    color: white;
+    min-width: 280px;
+}
+
+form textarea:focus {
+    outline: none;
+}
+
+form textarea::placeholder {
+    color: rgba(252, 252, 252, 0.462);
+}
+
+form p {
+    color: rgba(252, 252, 252, 0.462);
+}
+
+form button {
+    font-size: 1.15rem;
+    width: 5vw;
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(250, 124, 231);
+    margin: 2.5px;
+    transition: all .3s ease;
+    position: absolute;
+    right: 5%;
+}
+
+form button:hover {
+    background-color: rgb(248, 100, 226);
+    transform: translateY(4%);
+    cursor: pointer;
+}
+
+.post-item  {
+    background-color: rgb(63, 67, 90);
+    color: white;
+    padding: 15px;
+    width: 30vw;
+    margin: 10px;
+    border-radius: 16px;
+    position: relative;
+    padding-bottom: 50px;
+    box-shadow: 0 3px 7px black;
+    min-width: 300px;
+    text-decoration: none;
+}
+
+.post-head {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.post-head h6{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.post-head img{
+    border-radius: 50%;
+    width: 50px;
+}
+
+.post-item p {
+    width: 28vw;
+    word-wrap: break-word;
+    white-space: initial;
+    text-align: justify;
+    font-size: 1.1rem;
+}
+
+.post-page {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.post-user-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.post-user-top img{
+    width: 75px;
+    border-radius: 50%;
+}
+
+.post-user-top h6{
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.edit-btns {
+    display: flex;
+    gap: 5px;
+    position: absolute;
+    right: 5%;
+}
+
+.edit-btns button{
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.new-comment-section {
+    background-color: rgb(63, 67, 90);
+    width: 30vw;
+    padding: 5px;
+    border-radius: 12px;
+    margin-top: 5px;
+    box-shadow: 0 1px 5px black;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.new-comment-section img{
+    border-radius: 50%;
+    width: 60px;
+}
+
+.new-comment-section textarea{
+    background-color: rgb(92, 90, 109);
+    color: white;
+    resize: none;
+    width: 20vw;
+    height: 6vh;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+.new-comment-section textarea:focus{
+    outline: none;
+}
+
+.new-comment-section textarea::placeholder{
+    color: rgba(255, 255, 255, 0.703);
+}
+
+.new-comment-section button{
+    padding: 5px;
+    border-radius: 8px;
+    border: none;
+    width: 5vw;
+    height: 5vh;
+    background-color: rgb(250, 124, 231);
+    transition: all .3s ease;
+}
+
+.new-comment-section button:hover{
+    background-color: rgb(248, 100, 226);
+    transform: translateY(4%);
+    cursor: pointer;
+}
+
