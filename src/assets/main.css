@@ -136,3 +136,8 @@ nav {
     transform: translateY(4%);
     cursor: pointer;
 }
+
+.my-posts {
+    font-weight: 600;
+    padding: 10px;
+}

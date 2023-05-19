@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import CreatePost from "./CreatePost"
 import { collection, onSnapshot, query } from 'firebase/firestore'
 import { db } from "../firebase_config";
-import { Link } from "react-router-dom";
+import PostItem from "./PostItem";
 
 const PostContainer = () => {
   const [posts, setPosts] = useState([]);
@@ -27,13 +27,7 @@ const PostContainer = () => {
 
   const postsRender = posts?.map(item => {
     return (
-      <Link key={item.id} to={`/post/${item.id}`} className='post-item'>
-        <div className='post-head'>
-          <img src={item.data.userPhotoURl} draggable={false} alt="profile picture"/>
-          <h6>{item.data.userName}</h6>
-        </div>
-        <p>{item.data.postBody}</p>
-    </Link>
+      <PostItem key={item.id} id={item.id} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
     )
   })
 

@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar";
 import './assets/posts.css'
 import { Route, Routes } from "react-router";
 import Post from "./components/Post";
+import MyPosts from "./components/MyPosts";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<PostContainer/>}/>
         <Route path='/post/:id' element={<Post/>}/>
-        {/* <Route path='' element={}/> */}
+        <Route path='/my-posts' element={<MyPosts/>}/>
       </Routes>
     </>
   );
