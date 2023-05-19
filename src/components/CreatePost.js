@@ -16,8 +16,8 @@ const CreatePost = () => {
         setError('');
         setMessage('');
 
-        if(postText.length < 1) return setError('Min. 1 character');
         if(currentUser === null) return setError('Must log in');
+        if(postText.length < 1) return setError('Min. 1 character');
 
         try {
             await addDoc(collectionPostsRef, {
@@ -25,6 +25,7 @@ const CreatePost = () => {
                 userPhotoURl: currentUser?.photoURL,
                 userName: currentUser?.displayName,
                 postBody: postText,
+                updated: false,
                 comments: []
             })
             setMessage('Post created')
@@ -53,8 +54,8 @@ const CreatePost = () => {
                 <button>Post</button>
             </form>
         </div>
-        {error && <div>HELLo</div>}
-        {message && <div>AD</div>}
+        {error && <div>{error}</div>}
+        {message && <div>{message}</div>}
     </>
   )
 }

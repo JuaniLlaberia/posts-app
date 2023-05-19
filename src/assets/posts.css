@@ -204,3 +204,98 @@ form button:hover {
     cursor: pointer;
 }
 
+.comments-count {
+    color: rgba(255, 255, 255, 0.563);
+    margin-left: 10px;
+}
+
+.comments-section {
+    width: 30vw;
+    background-color: rgb(63, 67, 90);
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.comment {
+    display: flex;
+    gap: 5px;
+    background-color: rgb(92, 90, 109);
+    margin: 7.5px;
+    border-radius: 8px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.comment button {
+    position: absolute;
+    right: 2.5%;
+    top: 10%;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.comment h6 {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: white;
+}
+
+.comment p {
+    color: white;
+    font-size: 1rem;
+    text-align: justify;
+    word-wrap: break-word;
+    white-space: initial;
+    width: 22.5vw;
+}
+
+.comment img{
+    border-radius: 50%;
+    width: 60px;
+    margin: 5px;
+}
+
+.update-post-container {
+    background-color: rgb(92, 90, 109);
+    width: 35vw;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px black;
+    padding-bottom: 50px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    z-index: 100;
+}
+
+.update-post-container h3{
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 400;
+    margin: 5px;
+}
+
+.update-post-container form textarea{
+    width: 33.5vw;
+}
+
+.update-post-container .x-icon{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    position: absolute;
+    right: 2.5%;
+    cursor: pointer;
+}
+
+.edited {
+    color: rgba(255, 255, 255, 0.442);
+    font-weight: 300;
+    font-size: 1rem;
+}
