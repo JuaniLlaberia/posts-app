@@ -26,7 +26,8 @@ const CreatePost = () => {
                 userName: currentUser?.displayName,
                 postBody: postText,
                 updated: false,
-                comments: []
+                comments: [],
+                savedBy: [],
             })
             setMessage('Post created')
         } catch(err) {

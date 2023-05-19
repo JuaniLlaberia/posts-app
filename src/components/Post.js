@@ -1,4 +1,4 @@
-import { arrayUnion, deleteDoc, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import { arrayUnion, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router"
 import { db } from "../firebase_config";
 import { useEffect, useState } from "react";
@@ -66,15 +66,18 @@ const Post = () => {
 
     //CHECK IF IT IS MY POST
     const isMyPost = currentUser?.uid === post?.createdBy;
-    //Find current post in the favs collection
-    const postToUnFav = favPosts?.find(post => post.data.data.postId === id);
+
+    console.log(favPosts);
+
+    const postToUnFav = favPosts?.some(post => post.data.savedBy.includes(currentUser?.uid) && post.dataID === id);
+
 
   return (
     <>
     <main className='post-page'>
       <section className='post-item'>
         <div className='edit-btns'>
-          {postToUnFav ? <button onClick={() => removeFromFavs(postToUnFav.dataID)}><FontAwesomeIcon icon={bookmarkFilled}/></button> : <button onClick={() => addToFavs(post?.userName, post?.createdBy, post?.postBody, post?.userPhotoURl, post?.comments, post?.updated, id)}><FontAwesomeIcon icon={faBookmark}/></button>}
+          {postToUnFav ? <button onClick={() => removeFromFavs(id)}><FontAwesomeIcon icon={bookmarkFilled}/></button> : <button onClick={() => addToFavs(id)}><FontAwesomeIcon icon={faBookmark}/></button>}
           {isMyPost && <>
             <button><FontAwesomeIcon icon={faPenToSquare} onClick={() => setShowModal(true)}/></button>
             <button><FontAwesomeIcon icon={faTrashCan} onClick={handlePostRemove}/></button>

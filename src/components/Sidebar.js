@@ -22,6 +22,7 @@ const Sidebar = () => {
       <nav>
         <h1>LOGO</h1>
         <div className='sidebar-btns'>
+            <Link to='/saved'>Saved</Link>
             <Link to='/my-posts'>My Posts</Link>
             <button className='theme-icon'><FontAwesomeIcon icon={faSun} size="3x"/></button>
             {currentUser ? <img src={currentUser?.photoURL} className='user-img'/> : <button className='log-btn' onClick={() => setOpenModal(true)}>Login</button>}
