@@ -4,14 +4,15 @@ import { db } from "../firebase_config";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare, faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan, faPenToSquare, faBookmark, faHeart, faShareFromSquare, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import user_placeholder from '../assets/user_placeholder.png'
-import { faBookmark as bookmarkFilled, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark as bookmarkFilled, faHouse, faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Comment from "./Comment";
 import UpdatePost from "./UpdatePost";
 import {v4 as uuidv4} from 'uuid';
 import { useFavsContext } from "../context/FavsContext";
+import { useLikedContext } from "../context/LikedContext";
 
 const Post = () => {
     const { currentUser } = useAuthContext();
@@ -22,6 +23,8 @@ const Post = () => {
     const docRef = doc(db, 'posts', id);
     const [showModal, setShowModal] = useState(false);
     const { addToFavs, favPosts, removeFromFavs } = useFavsContext();
+    const { likePost, unlikePost } = useLikedContext();
+    const [copyMsg, setCopyMsg] = useState(false);
 
     //RETRIEVE DATA FROM THE POST IN REAL TIME
       useEffect(() => {
@@ -67,16 +70,29 @@ const Post = () => {
     //CHECK IF IT IS MY POST
     const isMyPost = currentUser?.uid === post?.createdBy;
 
-    console.log(favPosts);
-
+    //CHECK IF POST WAS SAVED
     const postToUnFav = favPosts?.some(post => post.data.savedBy.includes(currentUser?.uid) && post.dataID === id);
 
+    //CHECK IF YOU LIKED THE POST
+    const likedPost = post?.likedBy?.includes(currentUser?.uid);
+
+    const copyUrl = () => {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url)
+      setCopyMsg(true);
+    };
+
+    useEffect(() => {
+      setTimeout(() => setCopyMsg(false), 4000)
+    }, [copyMsg]);
 
   return (
     <>
     <main className='post-page'>
       <section className='post-item'>
         <div className='edit-btns'>
+          {likedPost ? <button style={{color:'#fa4b3e'}} onClick={() => unlikePost(id)}>{post?.likedBy?.length} <FontAwesomeIcon icon={fullHeart}/></button> : <button onClick={() => likePost(id)}>{post?.likedBy?.length} <FontAwesomeIcon icon={faHeart}/></button>}
+          <button onClick={copyUrl}><FontAwesomeIcon icon={faShareFromSquare}/></button>
           {postToUnFav ? <button onClick={() => removeFromFavs(id)}><FontAwesomeIcon icon={bookmarkFilled}/></button> : <button onClick={() => addToFavs(id)}><FontAwesomeIcon icon={faBookmark}/></button>}
           {isMyPost && <>
             <button><FontAwesomeIcon icon={faPenToSquare} onClick={() => setShowModal(true)}/></button>
@@ -101,6 +117,7 @@ const Post = () => {
         })}
       </ul>
       <Link to='/' style={{position: 'absolute', left:'30%', top:'5%'}}><FontAwesomeIcon icon={faHouse}/></Link>
+      {copyMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>Copied</p></div>}
     </main>
     {showModal && <UpdatePost body={post?.postBody} closeModal={() => setShowModal(false)} id={id}/>}
     {showModal && <div className='overlay'></div>}

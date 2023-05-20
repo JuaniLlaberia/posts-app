@@ -81,9 +81,15 @@ form button:hover {
     margin: 10px;
     border-radius: 16px;
     position: relative;
-    padding-bottom: 50px;
+    padding-bottom: 35px;
     box-shadow: 0 3px 7px black;
     min-width: 300px;
+    text-decoration: none;
+    
+}
+
+.post-item a {
+    color: white;
     text-decoration: none;
 }
 
@@ -298,4 +304,51 @@ form button:hover {
     color: rgba(255, 255, 255, 0.442);
     font-weight: 300;
     font-size: 1rem;
+}
+
+.post-item-btns {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5px;
+    padding: 3.5px;
+    width: 6vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.post-item-btns button{
+    background-color: transparent;
+    border: none;
+}
+
+.post-save-btn {
+    color: white;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: all .3s ease;
+}
+
+.post-save-btn.notsaved:hover {
+    color: rgb(253, 77, 220);
+}
+
+.copy-msg {
+    padding: 7.5px 25px;
+    border-radius: 8px;
+    background-color: rgb(25, 27, 26);
+    color: rgb(85, 202, 85);
+    display: flex;
+    gap: 5px;
+    font-size: 1.25rem;
+    position: absolute;
+    bottom: 2.5%;
+    right: 5%;
+}
+
+.copy-msg p {
+    color: white;
 }

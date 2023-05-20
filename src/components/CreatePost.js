@@ -28,6 +28,7 @@ const CreatePost = () => {
                 updated: false,
                 comments: [],
                 savedBy: [],
+                likedBy: [],
             })
             setMessage('Post created')
         } catch(err) {

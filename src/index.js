@@ -4,17 +4,20 @@ import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter } from 'react-router-dom';
 import { FavsProvider } from './context/FavsContext';
+import { LikedProvider } from './context/LikedContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <AuthProvider>
-      <FavsProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </FavsProvider>
+      <LikedProvider>
+        <FavsProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </FavsProvider>
+      </LikedProvider>
     </AuthProvider>
   </BrowserRouter>
 );
