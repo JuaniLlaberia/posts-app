@@ -6,7 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare, faBookmark, faHeart, faShareFromSquare, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import user_placeholder from '../assets/user_placeholder.png'
-import { faBookmark as bookmarkFilled, faArrowLeft, faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark as bookmarkFilled, faArrowLeft, faPaperPlane, faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Comment from "./Comment";
 import UpdatePost from "./UpdatePost";
@@ -99,7 +99,7 @@ const Post = () => {
     <main className='post-page'>
       <section className='post-item'>
         <div className='edit-btns'>
-          {likedPost ? <button style={{color:'#fa4b3e'}} onClick={() => unlikePost(id)}>{likesNum()} <FontAwesomeIcon icon={fullHeart}/></button> : <button onClick={() => likePost(id)}>{likesNum()} <FontAwesomeIcon icon={faHeart}/></button>}
+          {likedPost ? <button style={{color:'#fa4b3e', display:'flex', justifyContent:'center', alignItems:'center', gap:'5px'}} onClick={() => unlikePost(id)}>{likesNum()} <FontAwesomeIcon icon={fullHeart}/></button> : <button style={{display:'flex', justifyContent:'center', alignItems:'center', gap:'5px'}} onClick={() => likePost(id)}>{likesNum()} <FontAwesomeIcon icon={faHeart}/></button>}
           <button onClick={copyUrl}><FontAwesomeIcon icon={faShareFromSquare}/></button>
           {postToUnFav ? <button onClick={() => removeFromFavs(id)}><FontAwesomeIcon icon={bookmarkFilled}/></button> : <button onClick={() => addToFavs(id)}><FontAwesomeIcon icon={faBookmark}/></button>}
           {isMyPost && <>
@@ -116,7 +116,7 @@ const Post = () => {
       <section className='new-comment-section'>
         { currentUser ? <img src={currentUser?.photoURL} draggable={false} alt="profile picture"/> : <img src={user_placeholder} draggable={false}alt="default profile picture"/>}
         <textarea value={comment} className='comment-box' placeholder="Write your comment" maxLength={100} onChange={e => setComment(e.target.value)}/>
-        <button onClick={addComment} disabled={comment.length < 1}>Comment</button>
+        <button onClick={addComment} disabled={comment.length < 1}><FontAwesomeIcon icon={faPaperPlane}/></button>
       </section>
       <ul className='comments-section'>
         <div className='comments-count'>Comments: {post?.comments?.length}</div>

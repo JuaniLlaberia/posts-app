@@ -46,7 +46,7 @@ body.light {
     position: relative;
     padding-bottom: 50px;
     box-shadow: 0 5px 14px black;
-    min-width: 300px;
+    min-width: 400px;
 }
 
 .create-post-container h3 {
@@ -66,7 +66,7 @@ form textarea {
     padding: 5px 10px;
     background-color: transparent;
     color: var(--main-font);
-    min-width: 280px;
+    min-width: 380px;
 }
 
 form textarea:focus {
@@ -84,7 +84,8 @@ form p {
 form button {
     font-size: 1.15rem;
     font-weight: 600;
-    width: 5vw;
+    width: 7vw;
+    min-width: 80px;
     padding: 5px;
     border: none;
     border-radius: 8px;
@@ -92,7 +93,7 @@ form button {
     margin: 2.5px;
     transition: all .3s ease;
     position: absolute;
-    right: 7.5%;
+    right: 10%;
 }
 
 form button:hover {
@@ -117,7 +118,7 @@ form button:disabled {
     padding-bottom: 25px;
     box-shadow: var(--shadow);
     border:  var(--border);
-    min-width: 300px;
+    min-width: 400px;
     text-decoration: none;
     transition: all .3s ease;
 }
@@ -159,6 +160,7 @@ form button:disabled {
 
 .post-item p {
     width: 28vw;
+    min-width: 380px;
     word-wrap: break-word;
     white-space: initial;
     text-align: justify;
@@ -359,7 +361,7 @@ form button:disabled {
     font-size: 1.5rem;
     display: flex;
     gap: 5px;
-    position: absolute;
+    position: fixed;
     bottom: 2.5%;
     right: 5%;
 }
@@ -382,4 +384,116 @@ form button:disabled {
     font-weight: 600;
     padding: 10px;
     color: var(--main-font);
+}
+
+@media (max-width:475px) {
+    .create-post-container {
+        width: 75vw;
+        min-width: 0;
+    }
+
+    .create-post-container h3 {
+        font-size: 1rem;
+    }
+
+    form textarea {
+        font-size: .9rem;
+        width: 70vw;
+        height: 20vh;
+        min-width: 0;
+    }
+
+    form button:hover {
+        transform: translateY(0%);
+        background-color: rgb(250, 124, 231);
+    }
+    .post-item  {
+        width: 75vw;
+        min-width: 0;
+    }
+
+    .post-head h6{
+        font-size: .9rem;
+    }
+
+    .post-item p {
+        width: 68vw;
+        min-width: 0;
+        font-size: 1rem;
+    }
+
+    .post-user-top h6{
+        font-size: 1rem;
+    }
+
+    .edit-btns {
+        right: 50%;
+        top: 105%;
+        transform: translate(50%, 0);
+        background-color: var(--second-bg);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        padding: 10px;
+    }
+
+    .new-comment-section {
+        width: 75vw;
+        margin-top: 70px;
+    }
+
+    .new-comment-section img{
+        width: 45px;
+        height: 45px;
+    }
+    
+    .new-comment-section textarea{
+        width: 50vw;
+        font-size: .85rem;
+    }
+
+    .new-comment-section textarea::placeholder{
+        font-size: .85rem;
+    }
+
+    .new-comment-section button{
+        width: 10vw;
+        margin-right: 2.5px;
+    }
+
+    .new-comment-section button:hover{
+        background-color: rgb(250, 124, 231);
+        transform: translateY(0%);
+    }
+
+    .comments-section {
+        width: 75vw;
+    }
+
+    .comment h6 {
+        font-size: .8rem;
+    }
+
+    .comment p {
+        font-size: .8rem;
+        width: 47.5vw;
+    }
+
+    .comment img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .update-post-container {
+        width: 80vw;
+    }
+
+    .update-post-container form textarea{
+        width: 75vw;
+        height: 30vh;
+    }
+
+    .back-home {
+        left: 4%;
+        top: 10%;
+    }
 }
