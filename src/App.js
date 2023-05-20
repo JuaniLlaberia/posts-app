@@ -5,10 +5,13 @@ import { Route, Routes } from "react-router";
 import Post from "./components/Post";
 import MyPosts from "./components/MyPosts";
 import MyFavs from "./components/MyFavs";
+import { useThemeContext } from "./context/ThemeContext";
 
 function App() {
+  const {theme} = useThemeContext();
+
   return (
-    <>
+    <body className={`${theme}`}>
       <Sidebar/>
       <Routes>
         <Route exact path='/' element={<PostContainer/>}/>
@@ -16,7 +19,7 @@ function App() {
         <Route path='/my-posts' element={<MyPosts/>}/>
         <Route path='/saved' element={<MyFavs/>}/>
       </Routes>
-    </>
+    </body>
   );
 }
 

@@ -4,6 +4,9 @@ import { db } from "../firebase_config";
 import { useAuthContext } from "../context/AuthContext";
 import PostItem from "./PostItem";
 import '../assets/main.css';
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const MyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
@@ -36,10 +39,13 @@ const MyPosts = () => {
       })
 
   return (
-    <ul className='posts-container'>
-        <h1 className='my-posts'>My Posts</h1>
-      {postsRender}
-    </ul>
+    <>
+      <ul className='posts-container'>
+          <h1 className='my-posts'>My Posts</h1>
+        {postsRender}
+      </ul>
+      <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>
+    </>
   )
 }
 

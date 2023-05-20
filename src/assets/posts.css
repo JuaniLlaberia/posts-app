@@ -4,27 +4,54 @@
     box-sizing: border-box;
 }
 
-.posts-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+body.dark {
+    --page-bg: rgb(39, 36, 36);
+    --main-bg: rgb(56, 55, 61);
+    --second-bg: rgb(45, 44, 48);
+    --main-font: white;
+    --second-font: rgba(252, 252, 252, 0.5);
+    --placeholder-color: rgba(252, 252, 252, 0.245);
+    --popup-bg:rgb(242, 248, 245);
+    --popup-text:black;
+    --shadow: 0 3px 12px rgb(0, 0, 0);
+
+    background-color: rgb(39, 36, 36);
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 25px;
+    transition: all .5s ease;
+}
+
+body.light {
+    --main-bg: #ffffff;
+    --second-bg: #fffffff1;
+    --main-font: rgb(27, 26, 26);
+    --second-font: rgba(0, 0, 0, 0.633);
+    --placeholder-color: rgba(0, 0, 0, 0.364);
+    --popup-bg:rgb(45, 44, 48);
+    --popup-text:rgb(255, 255, 255);
+    --border: 1px solid rgba(0, 0, 0, 0.351);
+    --shadow: 0 1px 5px rgb(0, 0, 0);
+
+    background-color: #f6f6f6;
+    transition: all .5s ease;
 }
 
 .create-post-container {
-    background-color: rgb(39, 38, 46);
+    background-color: var(--main-bg);
     padding: 15px;
     width: 30vw;
     margin: 20px;
-    border-radius: 16px;
+    border-radius: 8px;
     position: relative;
     padding-bottom: 50px;
-    box-shadow: 0 3px 7px black;
+    box-shadow: 0 5px 14px black;
     min-width: 300px;
 }
 
 .create-post-container h3 {
-    color: white;
+    color: var(--main-font);
+    font-weight: 600;
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
@@ -37,8 +64,8 @@ form textarea {
     border: none;
     border-radius: 8px;
     padding: 5px 10px;
-    background-color: rgb(63, 67, 90);
-    color: white;
+    background-color: transparent;
+    color: var(--main-font);
     min-width: 280px;
 }
 
@@ -47,15 +74,16 @@ form textarea:focus {
 }
 
 form textarea::placeholder {
-    color: rgba(252, 252, 252, 0.462);
+    color: var(--placeholder-color);
 }
 
 form p {
-    color: rgba(252, 252, 252, 0.462);
+    color: var(--second-font);
 }
 
 form button {
     font-size: 1.15rem;
+    font-weight: 600;
     width: 5vw;
     padding: 5px;
     border: none;
@@ -64,7 +92,7 @@ form button {
     margin: 2.5px;
     transition: all .3s ease;
     position: absolute;
-    right: 5%;
+    right: 7.5%;
 }
 
 form button:hover {
@@ -73,23 +101,41 @@ form button:hover {
     cursor: pointer;
 }
 
-.post-item  {
-    background-color: rgb(63, 67, 90);
-    color: white;
-    padding: 15px;
-    width: 30vw;
-    margin: 10px;
-    border-radius: 16px;
-    position: relative;
-    padding-bottom: 35px;
-    box-shadow: 0 3px 7px black;
-    min-width: 300px;
-    text-decoration: none;
-    
+form button:disabled {
+    filter: brightness(0.9);
+    cursor: not-allowed;
 }
 
+.post-item  {
+    background-color: var(--second-bg);
+    color: var(--main-font);
+    padding: 15px;
+    width: 30vw;
+    margin: 5px;
+    border-radius: 8px;
+    position: relative;
+    padding-bottom: 25px;
+    box-shadow: var(--shadow);
+    border:  var(--border);
+    min-width: 300px;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+.post-item:hover {
+    background-color: var(--main-bg);
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .post-item a {
-    color: white;
+    color: var(--main-font);
     text-decoration: none;
 }
 
@@ -122,8 +168,8 @@ form button:hover {
 .post-page {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
+    padding-top: 25px;
 }
 
 .post-user-top {
@@ -154,15 +200,15 @@ form button:hover {
     background-color: transparent;
     border: none;
     font-size: 1.5rem;
-    color: white;
+    color: var(--main-font);
     cursor: pointer;
 }
 
 .new-comment-section {
-    background-color: rgb(63, 67, 90);
+    background-color: var(--main-bg);
     width: 30vw;
     padding: 5px;
-    border-radius: 12px;
+    border-radius: 8px;
     margin-top: 5px;
     box-shadow: 0 1px 5px black;
     display: flex;
@@ -176,14 +222,15 @@ form button:hover {
 }
 
 .new-comment-section textarea{
-    background-color: rgb(92, 90, 109);
-    color: white;
+    background-color: transparent;
+    color: var(--main-font);
     resize: none;
     width: 20vw;
     height: 6vh;
     border: none;
     border-radius: 8px;
     padding: 5px 10px;
+    font-size: 1rem;
 }
 
 .new-comment-section textarea:focus{
@@ -191,10 +238,11 @@ form button:hover {
 }
 
 .new-comment-section textarea::placeholder{
-    color: rgba(255, 255, 255, 0.703);
+    color: var(--placeholder-color);
 }
 
 .new-comment-section button{
+    font-weight: 600;
     padding: 5px;
     border-radius: 8px;
     border: none;
@@ -210,48 +258,45 @@ form button:hover {
     cursor: pointer;
 }
 
+.new-comment-section button:disabled{
+    filter: brightness(.9);
+    transform: translateY(0%);
+    cursor: not-allowed;
+}
+
 .comments-count {
-    color: rgba(255, 255, 255, 0.563);
+    color: var(--second-font);
     margin-left: 10px;
 }
 
 .comments-section {
     width: 30vw;
-    background-color: rgb(63, 67, 90);
+    background-color: var(--main-bg);
     margin-top: 15px;
     border-radius: 8px;
     padding: 5px;
+    box-shadow: 0 3px 7px black;
 }
 
 .comment {
     display: flex;
     gap: 5px;
-    background-color: rgb(92, 90, 109);
+    background-color: var(--second-bg);
     margin: 7.5px;
     border-radius: 8px;
     padding-bottom: 10px;
     position: relative;
 }
 
-.comment button {
-    position: absolute;
-    right: 2.5%;
-    top: 10%;
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
 .comment h6 {
     font-size: 1rem;
+    font-weight: 400;
     margin-top: 10px;
-    color: white;
+    color: var(--main-font);
 }
 
 .comment p {
-    color: white;
+    color: var(--main-font);
     font-size: 1rem;
     text-align: justify;
     word-wrap: break-word;
@@ -266,7 +311,7 @@ form button:hover {
 }
 
 .update-post-container {
-    background-color: rgb(92, 90, 109);
+    background-color: var(--main-bg);
     width: 35vw;
     padding: 10px;
     border-radius: 8px;
@@ -281,7 +326,7 @@ form button:hover {
 
 .update-post-container h3{
     font-size: 1.5rem;
-    color: white;
+    color: var(--main-font);
     font-weight: 400;
     margin: 5px;
 }
@@ -293,7 +338,7 @@ form button:hover {
 .update-post-container .x-icon{
     background-color: transparent;
     border: none;
-    color: white;
+    color: var(--main-font);
     font-size: 1rem;
     position: absolute;
     right: 2.5%;
@@ -301,54 +346,40 @@ form button:hover {
 }
 
 .edited {
-    color: rgba(255, 255, 255, 0.442);
-    font-weight: 300;
+    color: var(--second-font);
+    font-weight: 400;
     font-size: 1rem;
-}
-
-.post-item-btns {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 5px;
-    padding: 3.5px;
-    width: 6vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    border-radius: 30px;
-}
-
-.post-item-btns button{
-    background-color: transparent;
-    border: none;
-}
-
-.post-save-btn {
-    color: white;
-    cursor: pointer;
-    font-size: 1.25rem;
-    transition: all .3s ease;
-}
-
-.post-save-btn.notsaved:hover {
-    color: rgb(253, 77, 220);
 }
 
 .copy-msg {
     padding: 7.5px 25px;
     border-radius: 8px;
-    background-color: rgb(25, 27, 26);
+    background-color: var(--popup-bg);
     color: rgb(85, 202, 85);
+    font-size: 1.5rem;
     display: flex;
     gap: 5px;
-    font-size: 1.25rem;
     position: absolute;
     bottom: 2.5%;
     right: 5%;
 }
 
 .copy-msg p {
-    color: white;
+    color: var(--popup-text);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.back-home {
+    position: absolute;
+    top: 5%;
+    left: 32.5%;
+    font-size: 1.25rem;
+    color: var(--main-font);
+}
+
+.my-posts {
+    font-weight: 600;
+    padding: 10px;
+    color: var(--main-font);
 }

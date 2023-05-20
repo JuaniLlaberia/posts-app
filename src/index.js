@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter } from 'react-router-dom';
 import { FavsProvider } from './context/FavsContext';
 import { LikedProvider } from './context/LikedContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,9 +14,11 @@ root.render(
     <AuthProvider>
       <LikedProvider>
         <FavsProvider>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
+          <ThemeProvider>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </ThemeProvider>
         </FavsProvider>
       </LikedProvider>
     </AuthProvider>

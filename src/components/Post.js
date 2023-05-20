@@ -6,7 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare, faBookmark, faHeart, faShareFromSquare, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import user_placeholder from '../assets/user_placeholder.png'
-import { faBookmark as bookmarkFilled, faHouse, faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark as bookmarkFilled, faArrowLeft, faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Comment from "./Comment";
 import UpdatePost from "./UpdatePost";
@@ -86,12 +86,20 @@ const Post = () => {
       setTimeout(() => setCopyMsg(false), 4000)
     }, [copyMsg]);
 
+    const likesNum = () => {
+      const likes = post?.likedBy?.length;
+      if(likes === 0) return '';
+      if(likes > 1000 && likes < 1000000) return `${likes / 1000}K`
+      if(likes > 1000000) return `${likes / 1000000}M`
+      return likes
+    }
+
   return (
     <>
     <main className='post-page'>
       <section className='post-item'>
         <div className='edit-btns'>
-          {likedPost ? <button style={{color:'#fa4b3e'}} onClick={() => unlikePost(id)}>{post?.likedBy?.length} <FontAwesomeIcon icon={fullHeart}/></button> : <button onClick={() => likePost(id)}>{post?.likedBy?.length} <FontAwesomeIcon icon={faHeart}/></button>}
+          {likedPost ? <button style={{color:'#fa4b3e'}} onClick={() => unlikePost(id)}>{likesNum()} <FontAwesomeIcon icon={fullHeart}/></button> : <button onClick={() => likePost(id)}>{likesNum()} <FontAwesomeIcon icon={faHeart}/></button>}
           <button onClick={copyUrl}><FontAwesomeIcon icon={faShareFromSquare}/></button>
           {postToUnFav ? <button onClick={() => removeFromFavs(id)}><FontAwesomeIcon icon={bookmarkFilled}/></button> : <button onClick={() => addToFavs(id)}><FontAwesomeIcon icon={faBookmark}/></button>}
           {isMyPost && <>
@@ -108,7 +116,7 @@ const Post = () => {
       <section className='new-comment-section'>
         { currentUser ? <img src={currentUser?.photoURL} draggable={false} alt="profile picture"/> : <img src={user_placeholder} draggable={false}alt="default profile picture"/>}
         <textarea value={comment} className='comment-box' placeholder="Write your comment" maxLength={100} onChange={e => setComment(e.target.value)}/>
-        <button onClick={addComment}>Comment</button>
+        <button onClick={addComment} disabled={comment.length < 1}>Comment</button>
       </section>
       <ul className='comments-section'>
         <div className='comments-count'>Comments: {post?.comments?.length}</div>
@@ -116,11 +124,11 @@ const Post = () => {
           return <Comment key={comment.commentBody} body={comment.commentBody} postId={id} id={comment.id} user={comment.userName} userImg={comment.userIMG} by={comment.createdBy}/>
         })}
       </ul>
-      <Link to='/' style={{position: 'absolute', left:'30%', top:'5%'}}><FontAwesomeIcon icon={faHouse}/></Link>
+      <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>
       {copyMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>Copied</p></div>}
     </main>
     {showModal && <UpdatePost body={post?.postBody} closeModal={() => setShowModal(false)} id={id}/>}
-    {showModal && <div className='overlay'></div>}
+    {showModal && <div className='overlay' onClick={() => setShowModal(false)}></div>}
     </>
   )
 }

@@ -53,7 +53,7 @@ const CreatePost = () => {
             <form onSubmit={handleCreatePost}>
                 <textarea value={postText} placeholder='Write your post here' onChange={e => setPostText(e.target.value)} maxLength={300}/>
                 <p>{postText.length}/300</p>
-                <button>Post</button>
+                <button disabled={postText.length < 1}>Post</button>
             </form>
         </div>
         {error && <div>{error}</div>}

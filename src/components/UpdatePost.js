@@ -28,7 +28,7 @@ const UpdatePost = ({body, closeModal, id}) => {
             <form onSubmit={handleChangePost}>
                 <textarea value={newBody} placeholder='Write your post here' onChange={e => setNewBody(e.target.value)} maxLength={300}/>
                 <p>{newBody.length}/300</p>
-                <button type="submit">Change</button>
+                <button type="submit" disabled={newBody.length < 1}>Change</button>
             </form>
     </div>
   )
