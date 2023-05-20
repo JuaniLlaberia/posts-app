@@ -158,9 +158,59 @@ nav {
     cursor: pointer;
 }
 
+.toggle-nav {
+    display: none;
+}
+
+@media (max-width:900px) {
+
+    .login-modal {
+    width: 50vw;
+}
+
+.login-btns button{
+    font-size: 1.5rem;
+    width: 30vw;
+    height: 12vh;
+}
+
+    .login-btns button:hover{
+        transform: translateY(0%);
+    }
+}
+
+@media (max-width:570px) {
+
+.login-modal {
+    width: 70vw;
+}
+
+.login-btns button{
+    width: 40vw;
+}
+}
+
 @media (max-width:700px) {
     nav {
-        display: none;
-        /* z-index: 1000; */
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: all .3s ease;
+        width: 180px;
     }
+
+    nav.active {
+        transform: translateX(0%);
+    }
+
+    .toggle-nav {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -24%;
+        background-color: rgb(24, 23, 23);
+        border: none;
+        color: white;
+        padding: 10px;
+    }
+
 }

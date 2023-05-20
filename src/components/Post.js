@@ -110,6 +110,7 @@ const Post = () => {
         <div className='post-user-top'>
             <img src={post?.userPhotoURl} draggable={false} alt="profile picture"/>
             <h6>{post?.userName} {post?.updated ? <span className='edited'>(edited)</span> : null}</h6>
+            <Link to='/' className='back-home-post'><FontAwesomeIcon icon={faArrowLeft}/></Link>
         </div>
         <p>{post?.postBody}</p>
       </section>
@@ -124,7 +125,7 @@ const Post = () => {
           return <Comment key={comment.commentBody} body={comment.commentBody} postId={id} id={comment.id} user={comment.userName} userImg={comment.userIMG} by={comment.createdBy}/>
         })}
       </ul>
-      <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>
+      
       {copyMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>Copied</p></div>}
     </main>
     {showModal && <UpdatePost body={post?.postBody} closeModal={() => setShowModal(false)} id={id}/>}

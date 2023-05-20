@@ -34,6 +34,9 @@ body.light {
     --shadow: 0 1px 5px rgb(0, 0, 0);
 
     background-color: #f6f6f6;
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 25px;
     transition: all .5s ease;
 }
 
@@ -216,6 +219,7 @@ form button:disabled {
     display: flex;
     gap: 5px;
     align-items: center;
+    min-width: 400px;
 }
 
 .new-comment-section img{
@@ -233,6 +237,7 @@ form button:disabled {
     border-radius: 8px;
     padding: 5px 10px;
     font-size: 1rem;
+    min-width: 250px;
 }
 
 .new-comment-section textarea:focus{
@@ -278,6 +283,7 @@ form button:disabled {
     border-radius: 8px;
     padding: 5px;
     box-shadow: 0 3px 7px black;
+    min-width: 400px;
 }
 
 .comment {
@@ -288,6 +294,7 @@ form button:disabled {
     border-radius: 8px;
     padding-bottom: 10px;
     position: relative;
+
 }
 
 .comment h6 {
@@ -304,11 +311,13 @@ form button:disabled {
     word-wrap: break-word;
     white-space: initial;
     width: 22.5vw;
+    min-width: 280px;
 }
 
 .comment img{
     border-radius: 50%;
     width: 60px;
+    height: 60px;
     margin: 5px;
 }
 
@@ -375,9 +384,16 @@ form button:disabled {
 .back-home {
     position: absolute;
     top: 5%;
-    left: 32.5%;
+    left: 10%;
     font-size: 1.25rem;
     color: var(--main-font);
+}
+
+.back-home-post {
+    position: absolute;
+    font-size: 1.25rem;
+    color: var(--main-font);
+    left: -10%;
 }
 
 .my-posts {
@@ -439,6 +455,7 @@ form button:disabled {
     .new-comment-section {
         width: 75vw;
         margin-top: 70px;
+        min-width: 0;
     }
 
     .new-comment-section img{
@@ -449,6 +466,7 @@ form button:disabled {
     .new-comment-section textarea{
         width: 50vw;
         font-size: .85rem;
+        min-width: 0;
     }
 
     .new-comment-section textarea::placeholder{
@@ -467,6 +485,7 @@ form button:disabled {
 
     .comments-section {
         width: 75vw;
+        min-width: 0;
     }
 
     .comment h6 {
@@ -476,6 +495,7 @@ form button:disabled {
     .comment p {
         font-size: .8rem;
         width: 47.5vw;
+        min-width: 0;
     }
 
     .comment img{
@@ -493,7 +513,7 @@ form button:disabled {
     }
 
     .back-home {
-        left: 4%;
+        left: 5%;
         top: 10%;
     }
 }
