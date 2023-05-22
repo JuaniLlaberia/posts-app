@@ -3,10 +3,12 @@ import CreatePost from "./CreatePost"
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from "../firebase_config";
 import PostItem from "./PostItem";
+import { ClipLoader } from "react-spinners";
 
 const PostContainer = () => {
   const [posts, setPosts] = useState([]);
   const collectionPostsRef = collection(db, 'posts');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -20,6 +22,7 @@ const PostContainer = () => {
           });
         });
         setPosts(res);
+        setIsLoading(false);
       }
     );
     return () => unsubscribe();
@@ -34,7 +37,8 @@ const PostContainer = () => {
   return (
     <ul className='posts-container'>
       <CreatePost />
-      {postsRender}
+      {isLoading && <ClipLoader color="#fa7ce7"/>}
+      {!isLoading && postsRender}
     </ul>
   )
 }

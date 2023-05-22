@@ -88,7 +88,7 @@
 
 nav {
     height: 100vh;
-    width: 100px;
+    width: 125px;
     background-color: rgb(24, 23, 23);
     padding: 5px;
     position: fixed;
@@ -100,14 +100,27 @@ nav {
     color: white;
 }
 
+.sidebar-btns.not-center a:not(.logo){
+    font-size: 1.25rem;
+    padding: 5px;
+    transition: all .3s ease;
+}
+
+.sidebar-btns.not-center a:hover:not(.logo){
+    background-color: rgba(60, 59, 59, 0.584);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.866);
+}
+
 .logo{
     display: flex;
     justify-content: center;
     font-weight: 600;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     text-decoration: none;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .sidebar-btns {
@@ -115,6 +128,10 @@ nav {
     flex-direction: column;
     gap: 10px;
     margin-bottom: 15px;
+}
+
+.sidebar-btns.not-center {
+    align-items: flex-start;
 }
 
 .theme-icon {
@@ -212,5 +229,7 @@ nav {
         color: white;
         padding: 10px;
     }
-
+    .sidebar-btns.not-center a:not(.logo){
+        font-size: 1.7rem;
+    }
 }

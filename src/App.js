@@ -21,6 +21,7 @@ function App() {
         <Route path='/saved' element={<MyFavs/>}/>
         <Route path='/trending' element={<TrendingPage/>}/>
       </Routes>
+      {/* <p className='author'>Created by <a href="https://github.com/JuaniLlaberia" target='_blank'>Juan I. Llaberia</a>.</p> */}
     </body>
   );
 }

@@ -3,7 +3,8 @@ import { useAuthContext } from "../context/AuthContext"
 import Login from "./Login";
 import '../assets/main.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faBars, faBookmark, faSun, faX } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faBars, faSun, faHouse, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faStar } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useThemeContext } from "../context/ThemeContext";
@@ -22,12 +23,15 @@ const Sidebar = () => {
   return (
     <>
       <nav className={isActive ? 'active' : ''} >
-        <Link to='/' className='logo' onClick={() => setIsActive(false)}>PostIt</Link>
+        <div className="sidebar-btns not-center">
+          <Link to='/' className='logo' onClick={() => setIsActive(false)}>PostIt</Link>
+          <Link to='/' onClick={() => setIsActive(false)}><FontAwesomeIcon icon={faHouse}/> Home</Link>
+          <Link to='/saved' onClick={() => setIsActive(false)}><FontAwesomeIcon icon={faBookmark}/> Saved</Link>
+          <Link to='/trending' onClick={() => setIsActive(false)}><FontAwesomeIcon icon={faStar}/> Popular</Link>
+        </div>
             <button className='toggle-nav' onClick={() => setIsActive(!isActive)}><FontAwesomeIcon size="2x" icon={isActive ? faArrowLeft : faBars}/></button>
         <div className='sidebar-btns' onClick={() => setIsActive(false)}>
-            <Link to='/saved'><FontAwesomeIcon size="2x" icon={faBookmark}/></Link>
-            <Link to='/trending'>Popular</Link>
-            <button className='theme-icon' onClick={() => toggleTheme(!theme)}><FontAwesomeIcon icon={faSun} size="3x"/></button>
+            <button className='theme-icon' onClick={() => toggleTheme(!theme)}><FontAwesomeIcon icon={theme === 'light' ? faSun : faMoon} size="3x"/></button>
             {currentUser ? <Link to='/my-posts' ><img src={currentUser?.photoURL} className='user-img'/></Link> : <button className='log-btn' onClick={() => setOpenModal(true)}>Login</button>}
             {currentUser ? <button className='log-btn' onClick={logoutAcc}>Log Out</button> : null}
         </div>

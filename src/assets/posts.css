@@ -385,6 +385,17 @@ form button:disabled {
     margin: 5px;
 }
 
+.comment button {
+    background-color: transparent;
+    border: none;
+    color: rgb(253, 62, 62);
+    position: absolute;
+    right: 2.5%;
+    top: 7.5%;
+    cursor: pointer;
+    font-size: 1.15rem;
+}
+
 .update-post-container {
     background-color: var(--main-bg);
     width: 35vw;
@@ -453,7 +464,7 @@ form button:disabled {
 .back-home {
     position: absolute;
     top: 5%;
-    left: 10%;
+    left: 17.5%;
     font-size: 1.25rem;
     color: var(--main-font);
 }
@@ -599,5 +610,19 @@ form button:disabled {
 }
 
 .date-post {
+    color: var(--second-font);
+}
+
+.author {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 15px;
+    margin-top: 40px;
+    color: var(--second-font);
+    font-size: .9rem;
+}
+
+.author a {
     color: var(--second-font);
 }

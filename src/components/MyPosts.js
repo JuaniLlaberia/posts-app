@@ -7,10 +7,12 @@ import '../assets/main.css';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
+import { ClipLoader } from "react-spinners";
 
 const MyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
     const { currentUser } = useAuthContext();
+    const [isLoading, setIsLoading] = useState(true);
 
     const collectionRef = collection(db, 'posts');
 
@@ -28,13 +30,14 @@ const MyPosts = () => {
                 })
             })
             setMyPosts(tempArr);
+            setIsLoading(false);
         }
         getMyPosts()
     }, [currentUser?.uid]);
 
     const postsRender = myPosts?.map(item => {
         return (
-          <PostItem key={item.dataID} likes={item?.data?.likedBy} id={item.dataID} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
+          <PostItem key={item.dataID} seconds={item?.data?.date?.seconds} likes={item?.data?.likedBy} id={item.dataID} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
         )
       })
 
@@ -48,7 +51,8 @@ const MyPosts = () => {
             <h6>{currentUser?.displayName}</h6>
           </div>
           {currentUser && <h6 className='my-posts' style={{fontSize: '1rem'}}>My posts</h6>}
-        {postsRender}
+          {isLoading && <ClipLoader color="#fa7ce7"/>}
+          {!isLoading && postsRender}
       </ul>
       <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>
     </>
