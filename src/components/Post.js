@@ -26,7 +26,7 @@ const Post = () => {
     const { addToFavs, favPosts, removeFromFavs } = useFavsContext();
     const { likePost, unlikePost } = useLikedContext();
     const [copyMsg, setCopyMsg] = useState(false);
-    const [commentMsg, setCommentMsg] = useState(false);
+    const [commentMsg, setCommentMsg] = useState('');
 
     //RETRIEVE DATA FROM THE POST IN REAL TIME
       useEffect(() => {
@@ -53,7 +53,7 @@ const Post = () => {
             id: uuidv4(),
           })
         });
-        setCommentMsg(true);
+        setCommentMsg('Comment sent');
       } catch(err) {
         console.log(err);
       }
@@ -90,7 +90,7 @@ const Post = () => {
     }, [copyMsg]);
 
     useEffect(() => {
-      setTimeout(() => setCommentMsg(false), 4000)
+      setTimeout(() => setCommentMsg(''), 4000)
     }, [commentMsg]);
 
     const likesNum = () => {
@@ -132,11 +132,11 @@ const Post = () => {
       <ul className='comments-section'>
         <div className='comments-count'>Comments: {post?.comments?.length}</div>
         {post?.comments?.slice().reverse().map(comment => {
-          return <Comment key={comment.id} body={comment.commentBody} postId={id} id={comment.id} user={comment.userName} userImg={comment.userIMG} by={comment.createdBy}/>
+          return <Comment key={comment.id} setMsg={setCommentMsg} body={comment.commentBody} postId={id} id={comment.id} user={comment.userName} userImg={comment.userIMG} by={comment.createdBy}/>
         })}
       </ul>
       {copyMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>Copied</p></div>}
-      {commentMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>Comment sent</p></div>}
+      {commentMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>{commentMsg}</p></div>}
     </main>
     {showModal && <UpdatePost body={post?.postBody} closeModal={() => setShowModal(false)} id={id}/>}
     {showModal && <div className='overlay' onClick={() => setShowModal(false)}></div>}

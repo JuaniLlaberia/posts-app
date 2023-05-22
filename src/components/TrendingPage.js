@@ -26,7 +26,7 @@ const TrendingPage = () => {
 
     const trendToRender = trendingPosts?.map(item => {
         return (
-            <PostItem key={item.id} id={item.id} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
+            <PostItem key={item.id} id={item.id} likes={item?.data?.likedBy} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
         )
     })
 
@@ -35,7 +35,6 @@ const TrendingPage = () => {
     <>
     <ul className='posts-container'>
         <h1 className='my-posts'>Trending Posts</h1>
-        {/* {currentUser === null ? <p className='error-login'><FontAwesomeIcon icon={faWarning} className='warning-icon'/>You must log in</p> : null} */}
       {trendToRender}
     </ul>
     <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>

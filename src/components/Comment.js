@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuthContext } from "../context/AuthContext";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { FieldValue, arrayRemove, doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase_config";
 
-const Comment = ({body, user, userImg, by, id, postId}) => {
+const Comment = ({body, user, userImg, by, id, postId, setMsg}) => {
   const { currentUser } = useAuthContext();
 
   const IsMyComment = currentUser?.uid === by;
@@ -13,16 +13,25 @@ const Comment = ({body, user, userImg, by, id, postId}) => {
 
   const handleCommentRemoval = async () => {
     try {
-      console.log('Removing comment with ID:', id);
-      console.log('Post reference:', postRef);
-  
-      await updateDoc(postRef, {
-        'comments': arrayRemove(id)
-     });
-  
-      console.log('Comment removed successfully');
+      const postDoc = await getDoc(postRef);
+
+      if (postDoc.exists()) {
+        const comments = postDoc.data().comments || [];
+
+        // Filter out the comment to be removed
+        const updatedComments = comments.filter(comment => comment.id !== id);
+
+        // Update the post document with the modified comments array
+        await updateDoc(postRef, {
+          comments: updatedComments
+        });
+
+        setMsg('Comment removed');
+      } else {
+        console.log('Not found');
+      }
     } catch (err) {
-      console.error('Error removing comment:', err);
+      console.log(err);
     }
   };
 

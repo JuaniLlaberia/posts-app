@@ -27,14 +27,13 @@ const PostContainer = () => {
 
   const postsRender = posts?.map(item => {
     return (
-      <PostItem key={item.id} id={item.id} photo={item.data.userPhotoURl} seconds={item?.data?.date?.seconds} name={item.data.userName} body={item.data.postBody}/>
+      <PostItem key={item.id}  id={item.id} likes={item?.data?.likedBy} photo={item.data.userPhotoURl} seconds={item?.data?.date?.seconds} name={item.data.userName} body={item.data.postBody}/>
     )
   })
 
   return (
     <ul className='posts-container'>
       <CreatePost />
-      {/* <h1 className='newest-title'>Newest Posts</h1> */}
       {postsRender}
     </ul>
   )
