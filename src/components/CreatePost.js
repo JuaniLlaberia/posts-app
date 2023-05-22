@@ -31,6 +31,7 @@ const CreatePost = () => {
                 comments: [],
                 savedBy: [],
                 likedBy: [],
+                likesNum: 0,
                 date: serverTimestamp(),
             })
             setMessage('Post created')

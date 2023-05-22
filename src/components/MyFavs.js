@@ -9,8 +9,6 @@ const MyFavs = () => {
     const {favPosts} = useFavsContext();
     const {currentUser} = useAuthContext();
 
-
-
     const favsToRender = favPosts?.map(item => {
         return (
             <PostItem key={item.dataID} id={item.dataID} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>

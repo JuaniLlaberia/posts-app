@@ -444,6 +444,13 @@ form button:disabled {
     color: var(--main-font);
 }
 
+.newest-title {
+    color: var(--main-font);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
 @media (max-width:475px) {
     .create-post-container {
         width: 75vw;

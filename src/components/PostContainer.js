@@ -34,6 +34,7 @@ const PostContainer = () => {
   return (
     <ul className='posts-container'>
       <CreatePost />
+      {/* <h1 className='newest-title'>Newest Posts</h1> */}
       {postsRender}
     </ul>
   )

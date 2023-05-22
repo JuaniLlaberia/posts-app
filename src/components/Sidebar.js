@@ -26,6 +26,7 @@ const Sidebar = () => {
             <button className='toggle-nav' onClick={() => setIsActive(!isActive)}><FontAwesomeIcon size="2x" icon={isActive ? faArrowLeft : faBars}/></button>
         <div className='sidebar-btns' onClick={() => setIsActive(false)}>
             <Link to='/saved'><FontAwesomeIcon size="2x" icon={faBookmark}/></Link>
+            <Link to='/trending'>Popular</Link>
             <button className='theme-icon' onClick={() => toggleTheme(!theme)}><FontAwesomeIcon icon={faSun} size="3x"/></button>
             {currentUser ? <Link to='/my-posts' ><img src={currentUser?.photoURL} className='user-img'/></Link> : <button className='log-btn' onClick={() => setOpenModal(true)}>Login</button>}
             {currentUser ? <button className='log-btn' onClick={logoutAcc}>Log Out</button> : null}
