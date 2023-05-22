@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import CreatePost from "./CreatePost"
-import { collection, onSnapshot, query } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from "../firebase_config";
 import PostItem from "./PostItem";
 
@@ -10,7 +10,7 @@ const PostContainer = () => {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
-      query(collectionPostsRef),
+      query(collectionPostsRef, orderBy('date', 'desc')),
       (snapshot) => {
         const res = [];
         snapshot.forEach((doc) => {
@@ -27,7 +27,7 @@ const PostContainer = () => {
 
   const postsRender = posts?.map(item => {
     return (
-      <PostItem key={item.id} id={item.id} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
+      <PostItem key={item.id} id={item.id} photo={item.data.userPhotoURl} seconds={item?.data?.date?.seconds} name={item.data.userName} body={item.data.postBody}/>
     )
   })
 

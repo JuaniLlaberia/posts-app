@@ -6,7 +6,7 @@ import PostItem from "./PostItem";
 import '../assets/main.css';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
 
 const MyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
@@ -41,7 +41,13 @@ const MyPosts = () => {
   return (
     <>
       <ul className='posts-container'>
-          <h1 className='my-posts'>My Posts</h1>
+          <h1 className='my-posts'>My Profile</h1>
+          {currentUser === null ? <p className='error-login'><FontAwesomeIcon icon={faWarning} className='warning-icon'/>You must log in</p> : null}
+          <div className='profile'>
+            <img src={currentUser?.photoURL} />
+            <h6>{currentUser?.displayName}</h6>
+          </div>
+          {currentUser && <h6 className='my-posts' style={{fontSize: '1rem'}}>My posts</h6>}
         {postsRender}
       </ul>
       <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>

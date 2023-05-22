@@ -13,6 +13,7 @@ import UpdatePost from "./UpdatePost";
 import {v4 as uuidv4} from 'uuid';
 import { useFavsContext } from "../context/FavsContext";
 import { useLikedContext } from "../context/LikedContext";
+import { formatDate } from "../formatDate";
 
 const Post = () => {
     const { currentUser } = useAuthContext();
@@ -25,6 +26,7 @@ const Post = () => {
     const { addToFavs, favPosts, removeFromFavs } = useFavsContext();
     const { likePost, unlikePost } = useLikedContext();
     const [copyMsg, setCopyMsg] = useState(false);
+    const [commentMsg, setCommentMsg] = useState(false);
 
     //RETRIEVE DATA FROM THE POST IN REAL TIME
       useEffect(() => {
@@ -35,7 +37,7 @@ const Post = () => {
           }
         );
         return () => unsubscribe();
-      }, []);
+      }, [docRef]);
 
     //ADD COMMENTS TO THE POST
     const addComment = async () => {
@@ -51,6 +53,7 @@ const Post = () => {
             id: uuidv4(),
           })
         });
+        setCommentMsg(true);
       } catch(err) {
         console.log(err);
       }
@@ -86,6 +89,10 @@ const Post = () => {
       setTimeout(() => setCopyMsg(false), 4000)
     }, [copyMsg]);
 
+    useEffect(() => {
+      setTimeout(() => setCommentMsg(false), 4000)
+    }, [commentMsg]);
+
     const likesNum = () => {
       const likes = post?.likedBy?.length;
       if(likes === 0) return '';
@@ -93,6 +100,8 @@ const Post = () => {
       if(likes > 1000000) return `${likes / 1000000}M`
       return likes
     }
+
+    const formatedDate = formatDate(post?.date?.seconds);
 
   return (
     <>
@@ -111,6 +120,7 @@ const Post = () => {
             <img src={post?.userPhotoURl} draggable={false} alt="profile picture"/>
             <h6>{post?.userName} {post?.updated ? <span className='edited'>(edited)</span> : null}</h6>
             <Link to='/' className='back-home-post'><FontAwesomeIcon icon={faArrowLeft}/></Link>
+            <p className='post-date'>{formatedDate}</p>
         </div>
         <p>{post?.postBody}</p>
       </section>
@@ -122,11 +132,11 @@ const Post = () => {
       <ul className='comments-section'>
         <div className='comments-count'>Comments: {post?.comments?.length}</div>
         {post?.comments?.slice().reverse().map(comment => {
-          return <Comment key={comment.commentBody} body={comment.commentBody} postId={id} id={comment.id} user={comment.userName} userImg={comment.userIMG} by={comment.createdBy}/>
+          return <Comment key={comment.id} body={comment.commentBody} postId={id} id={comment.id} user={comment.userName} userImg={comment.userIMG} by={comment.createdBy}/>
         })}
       </ul>
-      
       {copyMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>Copied</p></div>}
+      {commentMsg && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/> <p>Comment sent</p></div>}
     </main>
     {showModal && <UpdatePost body={post?.postBody} closeModal={() => setShowModal(false)} id={id}/>}
     {showModal && <div className='overlay' onClick={() => setShowModal(false)}></div>}

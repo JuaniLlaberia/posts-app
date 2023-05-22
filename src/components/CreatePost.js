@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { db } from '../firebase_config';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 //Collection is to create a new collection and addDoc is to create a new doc in the database
 
 const CreatePost = () => {
@@ -29,6 +31,7 @@ const CreatePost = () => {
                 comments: [],
                 savedBy: [],
                 likedBy: [],
+                date: serverTimestamp(),
             })
             setMessage('Post created')
         } catch(err) {
@@ -56,8 +59,8 @@ const CreatePost = () => {
                 <button disabled={postText.length < 1}>Post</button>
             </form>
         </div>
-        {error && <div>{error}</div>}
-        {message && <div>{message}</div>}
+        {error && <div className='copy-msg error'><FontAwesomeIcon icon={faCircleXmark}/><p>{error}</p></div>}
+        {message && <div className='copy-msg'><FontAwesomeIcon icon={faCircleCheck}/><p>{message}</p></div>}
     </>
   )
 }
