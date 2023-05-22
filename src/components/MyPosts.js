@@ -37,7 +37,7 @@ const MyPosts = () => {
 
     const postsRender = myPosts?.map(item => {
         return (
-          <PostItem key={item.dataID} seconds={item?.data?.date?.seconds} likes={item?.data?.likedBy} id={item.dataID} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
+          <PostItem key={item.dataID} seconds={item?.data?.date?.seconds} imgPath={item?.data.imgPath} likes={item?.data?.likedBy} id={item.dataID} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
         )
       })
 

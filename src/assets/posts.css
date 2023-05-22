@@ -127,6 +127,15 @@ form button:disabled {
     transition: all .3s ease;
 }
 
+.img-post {
+    width: 28vw;
+    min-width: 370px;
+    height: auto;
+    max-height: 500px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
 .post-item-buttons {
     position: absolute;
     display: flex;
@@ -223,6 +232,7 @@ form button:disabled {
     text-align: justify;
     font-size: 1.1rem;
     margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .post-page {
@@ -489,6 +499,15 @@ form button:disabled {
     margin-bottom: 5px;
 }
 
+.img-input {
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+    color: var(--second-font);
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
 @media (max-width:475px) {
     .create-post-container {
         width: 75vw;
@@ -523,6 +542,11 @@ form button:disabled {
         width: 68vw;
         min-width: 0;
         font-size: 1rem;
+    }
+
+    .img-post {
+        width: 68vw;
+        min-width: 0;
     }
 
     .post-user-top h6{
@@ -606,6 +630,11 @@ form button:disabled {
     .post-date {
         right: 5%;
         top: 2.5%;
+    }
+
+    .img-input {
+        bottom: 10%;
+        left: 35%;
     }
 }
 

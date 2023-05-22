@@ -1,6 +1,6 @@
 import { arrayUnion, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router"
-import { db } from "../firebase_config";
+import { db, storage } from "../firebase_config";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +14,7 @@ import {v4 as uuidv4} from 'uuid';
 import { useFavsContext } from "../context/FavsContext";
 import { useLikedContext } from "../context/LikedContext";
 import { formatDate } from "../formatDate";
+import { deleteObject, ref } from "firebase/storage";
 
 const Post = () => {
     const { currentUser } = useAuthContext();
@@ -63,6 +64,7 @@ const Post = () => {
     //REMOVE POST
     const handlePostRemove = async () => {
       try {
+        if(post?.imgPath) await deleteObject(ref(storage, post?.imgPath))
         await deleteDoc(docRef);
         navigate('/');
       } catch(err) {
@@ -123,6 +125,7 @@ const Post = () => {
             <p className='post-date'>{formatedDate}</p>
         </div>
         <p>{post?.postBody}</p>
+        {post?.imgPath ? <img className='img-post' src={post?.imgPath} /> : null}
       </section>
       <section className='new-comment-section'>
         { currentUser ? <img src={currentUser?.photoURL} draggable={false} alt="profile picture"/> : <img src={user_placeholder} draggable={false}alt="default profile picture"/>}

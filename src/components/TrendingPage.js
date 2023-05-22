@@ -28,7 +28,7 @@ const TrendingPage = () => {
 
     const trendToRender = trendingPosts?.map(item => {
         return (
-            <PostItem key={item.id} id={item.id} seconds={item?.data?.date?.seconds} likes={item?.data?.likedBy} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
+            <PostItem key={item.id} id={item.id} seconds={item?.data?.date?.seconds} imgPath={item?.data.imgPath} likes={item?.data?.likedBy} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
         )
     })
 

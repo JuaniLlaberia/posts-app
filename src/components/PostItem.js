@@ -7,7 +7,7 @@ import { faHeart, faBookmark} from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fullHeart, faBookmark as fullBookmark } from "@fortawesome/free-solid-svg-icons";
 import { useFavsContext } from '../context/FavsContext';
 
-const PostItem = ({id, photo, name, body, seconds, likes}) => {
+const PostItem = ({id, photo, name, body, seconds, likes, imgPath}) => {
   const date = formatDate(seconds);
   const { currentUser } = useAuthContext();
   const { likePost, unlikePost } = useLikedContext();
@@ -15,6 +15,8 @@ const PostItem = ({id, photo, name, body, seconds, likes}) => {
 
   const isPostLikedByUser = likes?.includes(currentUser?.uid);
   const isPostFav = favPosts?.some(post => post.data.savedBy.includes(currentUser?.uid) && post.dataID === id);
+
+  
 
   return (
     <div className='post-item'>
@@ -25,6 +27,7 @@ const PostItem = ({id, photo, name, body, seconds, likes}) => {
             <h6>{name}</h6>
           </div>
           <p>{body}</p>
+          {imgPath ? <img className='img-post' src={imgPath} /> : null}
       </Link>
       <div className='post-item-buttons'>
         {isPostLikedByUser ? <button>{likes?.length ? <span className='likes-num-post'>{likes?.length}</span> : ''} <FontAwesomeIcon  className='liked' size='2x' icon={fullHeart} onClick={() => unlikePost(id)}/></button> : <button onClick={() => likePost(id)}>{likes?.length ? <span className='likes-num-post'>{likes?.length}</span> : ''} <FontAwesomeIcon size='2x' icon={faHeart}/></button>}
