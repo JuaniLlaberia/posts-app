@@ -15,6 +15,7 @@ import { useFavsContext } from "../context/FavsContext";
 import { useLikedContext } from "../context/LikedContext";
 import { formatDate } from "../formatDate";
 import { deleteObject, ref } from "firebase/storage";
+import { ClipLoader } from "react-spinners";
 
 const Post = () => {
     const { currentUser } = useAuthContext();
@@ -28,6 +29,7 @@ const Post = () => {
     const { likePost, unlikePost } = useLikedContext();
     const [copyMsg, setCopyMsg] = useState(false);
     const [commentMsg, setCommentMsg] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     //RETRIEVE DATA FROM THE POST IN REAL TIME
       useEffect(() => {
@@ -35,6 +37,7 @@ const Post = () => {
           docRef,
           (doc) => {
               setPost(doc.data())
+              setIsLoading(false)
           }
         );
         return () => unsubscribe();
@@ -59,12 +62,12 @@ const Post = () => {
         console.log(err);
       }
       setComment('');
-    }
+    };
 
     //REMOVE POST
     const handlePostRemove = async () => {
       try {
-        if(post?.imgPath) await deleteObject(ref(storage, post?.imgPath))
+        if(post?.imgPath) await deleteObject(ref(storage, post?.imgPath));
         await deleteDoc(docRef);
         navigate('/');
       } catch(err) {
@@ -98,10 +101,10 @@ const Post = () => {
     const likesNum = () => {
       const likes = post?.likedBy?.length;
       if(likes === 0) return '';
-      if(likes > 1000 && likes < 1000000) return `${likes / 1000}K`
-      if(likes > 1000000) return `${likes / 1000000}M`
-      return likes
-    }
+      if(likes > 1000 && likes < 1000000) return `${likes / 1000}K`;
+      if(likes > 1000000) return `${likes / 1000000}M`;
+      return likes;
+    };
 
     const formatedDate = formatDate(post?.date?.seconds);
 
@@ -109,26 +112,28 @@ const Post = () => {
     <>
     <main className='post-page'>
       <section className='post-item'>
-        <div className='edit-btns'>
-          {likedPost ? <button style={{color:'#fa4b3e', display:'flex', justifyContent:'center', alignItems:'center', gap:'5px'}} onClick={() => unlikePost(id)}>{likesNum()} <FontAwesomeIcon icon={fullHeart}/></button> : <button style={{display:'flex', justifyContent:'center', alignItems:'center', gap:'5px'}} onClick={() => likePost(id)}>{likesNum()} <FontAwesomeIcon icon={faHeart}/></button>}
-          <button onClick={copyUrl}><FontAwesomeIcon icon={faShareFromSquare}/></button>
-          {postToUnFav ? <button onClick={() => removeFromFavs(id)}><FontAwesomeIcon icon={bookmarkFilled}/></button> : <button onClick={() => addToFavs(id)}><FontAwesomeIcon icon={faBookmark}/></button>}
-          {isMyPost && <>
-            <button><FontAwesomeIcon icon={faPenToSquare} onClick={() => setShowModal(true)}/></button>
-            <button><FontAwesomeIcon icon={faTrashCan} onClick={handlePostRemove}/></button>
-          </>}
-        </div>
-        <div className='post-user-top'>
-            <img src={post?.userPhotoURl} draggable={false} alt="profile picture"/>
-            <h6>{post?.userName} {post?.updated ? <span className='edited'>(edited)</span> : null}</h6>
-            <Link to='/' className='back-home-post'><FontAwesomeIcon icon={faArrowLeft}/></Link>
-            <p className='post-date'>{formatedDate}</p>
-        </div>
-        <p>{post?.postBody}</p>
-        {post?.imgPath ? <img className='img-post' src={post?.imgPath} /> : null}
+        {isLoading ? <ClipLoader color='#fa7ce7'/> : <>
+          <div className='edit-btns'>
+            {likedPost ? <button style={{color:'#fa4b3e', display:'flex', justifyContent:'center', alignItems:'center', gap:'5px'}} onClick={() => unlikePost(id)}>{likesNum()} <FontAwesomeIcon icon={fullHeart}/></button> : <button style={{display:'flex', justifyContent:'center', alignItems:'center', gap:'5px'}} onClick={() => likePost(id)}>{likesNum()} <FontAwesomeIcon icon={faHeart}/></button>}
+            <button onClick={copyUrl}><FontAwesomeIcon icon={faShareFromSquare}/></button>
+            {postToUnFav ? <button onClick={() => removeFromFavs(id)}><FontAwesomeIcon icon={bookmarkFilled}/></button> : <button onClick={() => addToFavs(id)}><FontAwesomeIcon icon={faBookmark}/></button>}
+            {isMyPost && <>
+              <button><FontAwesomeIcon icon={faPenToSquare} onClick={() => setShowModal(true)}/></button>
+              <button><FontAwesomeIcon icon={faTrashCan} onClick={handlePostRemove}/></button>
+            </>}
+          </div>
+          <div className='post-user-top'>
+              <img src={post?.userPhotoURl} draggable={false} alt="user"/>
+              <h6>{post?.userName} {post?.updated ? <span className='edited'>(edited)</span> : null}</h6>
+              <Link to='/' className='back-home-post'><FontAwesomeIcon icon={faArrowLeft}/></Link>
+              <p className='post-date'>{formatedDate}</p>
+          </div>
+          <p>{post?.postBody}</p>
+          {post?.imgPath ? <img className='img-post' src={post?.imgPath} alt=''/> : null}
+        </>}
       </section>
       <section className='new-comment-section'>
-        { currentUser ? <img src={currentUser?.photoURL} draggable={false} alt="profile picture"/> : <img src={user_placeholder} draggable={false}alt="default profile picture"/>}
+        { currentUser ? <img src={currentUser?.photoURL} draggable={false} alt="user"/> : <img src={user_placeholder} draggable={false}alt="default user"/>}
         <textarea value={comment} className='comment-box' placeholder="Write your comment" maxLength={100} onChange={e => setComment(e.target.value)}/>
         <button onClick={addComment} disabled={comment.length < 1}><FontAwesomeIcon icon={faPaperPlane}/></button>
       </section>

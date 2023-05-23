@@ -18,10 +18,8 @@ const Comment = ({body, user, userImg, by, id, postId, setMsg}) => {
       if (postDoc.exists()) {
         const comments = postDoc.data().comments || [];
 
-        // Filter out the comment to be removed
         const updatedComments = comments.filter(comment => comment.id !== id);
 
-        // Update the post document with the modified comments array
         await updateDoc(postRef, {
           comments: updatedComments
         });
@@ -38,7 +36,7 @@ const Comment = ({body, user, userImg, by, id, postId, setMsg}) => {
   return (
     <li className='comment'>
         {IsMyComment ? <button onClick={handleCommentRemoval}><FontAwesomeIcon icon={faTrashCan}/></button> : null}
-        <img src={userImg} draggable={false}/>
+        <img src={userImg} draggable={false} alt='user'/>
         <div>
             <h6>{user}</h6>
             <p>{body}</p>

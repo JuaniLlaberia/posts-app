@@ -18,7 +18,7 @@ const Sidebar = () => {
     const logoutAcc = () => {
         logout();
         navigate(0);
-    }
+    };
 
   return (
     <>
@@ -32,7 +32,7 @@ const Sidebar = () => {
             <button className='toggle-nav' onClick={() => setIsActive(!isActive)}><FontAwesomeIcon size="2x" icon={isActive ? faArrowLeft : faBars}/></button>
         <div className='sidebar-btns' onClick={() => setIsActive(false)}>
             <button className='theme-icon' onClick={() => toggleTheme(!theme)}><FontAwesomeIcon icon={theme === 'light' ? faSun : faMoon} size="3x"/></button>
-            {currentUser ? <Link to='/my-posts' ><img src={currentUser?.photoURL} className='user-img'/></Link> : <button className='log-btn' onClick={() => setOpenModal(true)}>Login</button>}
+            {currentUser ? <Link to='/my-posts' ><img src={currentUser?.photoURL} className='user-img' alt='user'/></Link> : <button className='log-btn' onClick={() => setOpenModal(true)}>Login</button>}
             {currentUser ? <button className='log-btn' onClick={logoutAcc}>Log Out</button> : null}
         </div>
       </nav>

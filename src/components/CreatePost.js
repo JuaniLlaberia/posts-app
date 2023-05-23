@@ -3,11 +3,10 @@ import { db, storage } from '../firebase_config';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck, faCircleXmark, faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
-
-//Collection is to create a new collection and addDoc is to create a new doc in the database
+import { faImage } from "@fortawesome/free-regular-svg-icons";
 
 const CreatePost = () => {
     const [postText, setPostText] = useState('');
@@ -23,8 +22,8 @@ const CreatePost = () => {
         setMessage('');
 
         if(currentUser === null) return setError('Must log in');
-        if(postText.length < 1) return setError('Min. 1 character');
 
+        //Taking care of the IMG
         let filePath = '';
         let imageId = '';
 
@@ -35,10 +34,11 @@ const CreatePost = () => {
                 await uploadBytes(storageRef, img);
                 filePath = await getDownloadURL(storageRef);
             } catch(err) {
-                return setError('Problem with img.')
+                return setError('Problem with img.');
             }
         };
 
+        //Creating the Post
         try {
             await addDoc(collectionPostsRef, {
                 createdBy: currentUser?.uid,
@@ -56,7 +56,6 @@ const CreatePost = () => {
             })
             setMessage('Post created')
         } catch(err) {
-            console.log(err);
             setError('Failed to post')
         }
         setPostText('');
@@ -73,7 +72,7 @@ const CreatePost = () => {
 
     useEffect(() => {
         if(!img) return;
-        setMessage('Img uploaded')
+        setMessage('Img uploaded');
     }, [img]);
 
   return (
@@ -84,8 +83,8 @@ const CreatePost = () => {
                 <textarea value={postText} placeholder='Write your post here' onChange={e => setPostText(e.target.value)} maxLength={300}/>
                 <p>{postText.length}/300</p>
                 <button disabled={postText.length < 1}>Post</button>
-                <label for='upload-photo' className='img-input'>
-                    <FontAwesomeIcon icon={faPaperclip} style={{color: img ? '#73de3a' : ''}}/>
+                <label htmlFor='upload-photo' className='img-input'>
+                    <FontAwesomeIcon icon={faImage} style={{color: img ? '#73de3a' : ''}}/>
                     <input style={{display:'none'}} accept="image/png, image/gif, image/jpeg" id='upload-photo' type="file" onChange={e => setImg(e.target.files[0])}/>
                 </label>
             </form>

@@ -7,12 +7,13 @@ import MyPosts from "./components/MyPosts";
 import MyFavs from "./components/MyFavs";
 import { useThemeContext } from "./context/ThemeContext";
 import TrendingPage from "./components/TrendingPage";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const {theme} = useThemeContext();
 
   return (
-    <body className={`${theme}`}>
+    <main className={`${theme}`}>
       <Sidebar/>
       <Routes>
         <Route exact path='/' element={<PostContainer/>}/>
@@ -20,9 +21,9 @@ function App() {
         <Route path='/my-posts' element={<MyPosts/>}/>
         <Route path='/saved' element={<MyFavs/>}/>
         <Route path='/trending' element={<TrendingPage/>}/>
+        <Route path='/*' element={<ErrorPage/>}/>
       </Routes>
-      {/* <p className='author'>Created by <a href="https://github.com/JuaniLlaberia" target='_blank'>Juan I. Llaberia</a>.</p> */}
-    </body>
+    </main>
   );
 }
 

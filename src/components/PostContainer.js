@@ -26,7 +26,7 @@ const PostContainer = () => {
       }
     );
     return () => unsubscribe();
-  }, []);
+  }, [collectionPostsRef]);
 
   const postsRender = posts?.map(item => {
     return (

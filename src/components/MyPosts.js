@@ -28,12 +28,12 @@ const MyPosts = () => {
                     data: item.data(),
                     dataID: item.id
                 })
-            })
+            });
             setMyPosts(tempArr);
             setIsLoading(false);
         }
-        getMyPosts()
-    }, [currentUser?.uid]);
+        getMyPosts();
+    }, [currentUser?.uid, collectionRef]);
 
     const postsRender = myPosts?.map(item => {
         return (
@@ -47,7 +47,7 @@ const MyPosts = () => {
           <h1 className='my-posts'>My Profile</h1>
           {currentUser === null ? <p className='error-login'><FontAwesomeIcon icon={faWarning} className='warning-icon'/>You must log in</p> : null}
           <div className='profile'>
-            <img src={currentUser?.photoURL} />
+            <img src={currentUser?.photoURL} alt='user'/>
             <h6>{currentUser?.displayName}</h6>
           </div>
           {currentUser && <h6 className='my-posts' style={{fontSize: '1rem'}}>My posts</h6>}

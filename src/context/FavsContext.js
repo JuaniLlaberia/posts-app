@@ -22,7 +22,7 @@ export const FavsProvider = ({children}) => {
             setFavPosts(tempArr);
         })
         return () => unsubscribe();
-    }, [currentUser?.uid])
+    }, [currentUser?.uid]);
 
     const addToFavs = async (docId) => {
             try {

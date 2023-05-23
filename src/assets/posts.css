@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body.dark {
+main.dark {
     --page-bg: rgb(39, 36, 36);
     --main-bg: rgb(56, 55, 61);
     --second-bg: rgb(45, 44, 48);
@@ -22,7 +22,7 @@ body.dark {
     transition: all .5s ease;
 }
 
-body.light {
+main.light {
     --main-bg: #ffffff;
     --second-bg: #fffffff1;
     --main-font: rgb(27, 26, 26);
@@ -131,8 +131,8 @@ form button:disabled {
     width: 28vw;
     min-width: 370px;
     height: auto;
-    max-height: 500px;
-    margin-bottom: 15px;
+    max-height: 700px;
+    margin-bottom: 25px;
     border-radius: 8px;
 }
 
@@ -508,7 +508,37 @@ form button:disabled {
     font-size: 1.5rem;
 }
 
+.fav-msg {
+    color: var(--second-font);
+    font-size: 1.15rem;
+}
+
+.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.error-page h3 {
+    color: var(--main-font);
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+.error-page span {
+    font-weight: 600;
+    font-size: 3rem;
+}
+
 @media (max-width:475px) {
+    .error-page h3 {
+        font-size: 1.5rem;
+    }
+
+    .error-page span {
+        font-size: 2rem;
+    }
     .create-post-container {
         width: 75vw;
         min-width: 0;

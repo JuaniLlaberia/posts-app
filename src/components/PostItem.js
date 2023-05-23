@@ -13,10 +13,9 @@ const PostItem = ({id, photo, name, body, seconds, likes, imgPath}) => {
   const { likePost, unlikePost } = useLikedContext();
   const { favPosts, removeFromFavs, addToFavs } = useFavsContext();
 
+  //Check if post is save or like by the current user
   const isPostLikedByUser = likes?.includes(currentUser?.uid);
   const isPostFav = favPosts?.some(post => post.data.savedBy.includes(currentUser?.uid) && post.dataID === id);
-
-  
 
   return (
     <div className='post-item'>
@@ -27,7 +26,7 @@ const PostItem = ({id, photo, name, body, seconds, likes, imgPath}) => {
             <h6>{name}</h6>
           </div>
           <p>{body}</p>
-          {imgPath ? <img className='img-post' src={imgPath} /> : null}
+          {imgPath ? <img className='img-post' src={imgPath} alt=''/> : null}
       </Link>
       <div className='post-item-buttons'>
         {isPostLikedByUser ? <button>{likes?.length ? <span className='likes-num-post'>{likes?.length}</span> : ''} <FontAwesomeIcon  className='liked' size='2x' icon={fullHeart} onClick={() => unlikePost(id)}/></button> : <button onClick={() => likePost(id)}>{likes?.length ? <span className='likes-num-post'>{likes?.length}</span> : ''} <FontAwesomeIcon size='2x' icon={faHeart}/></button>}
