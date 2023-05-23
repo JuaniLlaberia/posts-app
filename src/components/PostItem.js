@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBookmark} from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fullHeart, faBookmark as fullBookmark } from "@fortawesome/free-solid-svg-icons";
 import { useFavsContext } from '../context/FavsContext';
+import { renderPostContent } from '../bodyFormater';
 
-const PostItem = ({id, photo, name, body, seconds, likes, imgPath}) => {
+const PostItem = ({id, photo, name, body, seconds, likes, imgPath, hashtags}) => {
   const date = formatDate(seconds);
   const { currentUser } = useAuthContext();
   const { likePost, unlikePost } = useLikedContext();
@@ -25,7 +26,7 @@ const PostItem = ({id, photo, name, body, seconds, likes, imgPath}) => {
             <img src={photo} draggable={false} alt="profile"/>
             <h6>{name}</h6>
           </div>
-          <p>{body}</p>
+          <>{renderPostContent(body, hashtags)}</>
           {imgPath ? <img className='img-post' src={imgPath} alt=''/> : null}
       </Link>
       <div className='post-item-buttons'>

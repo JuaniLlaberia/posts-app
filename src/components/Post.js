@@ -16,6 +16,7 @@ import { useLikedContext } from "../context/LikedContext";
 import { formatDate } from "../formatDate";
 import { deleteObject, ref } from "firebase/storage";
 import { ClipLoader } from "react-spinners";
+import { renderPostContent } from "../bodyFormater";
 
 const Post = () => {
     const { currentUser } = useAuthContext();
@@ -108,23 +109,6 @@ const Post = () => {
 
     const formatedDate = formatDate(post?.date?.seconds);
 
-    const renderPostContent = (content, hashtags) => {
-      const contentParts = content.split(' ');
-    
-      const renderedContent = contentParts.map((part, index) => {
-        if (hashtags.includes(part.replace(/#/g, ''))) {
-          return (
-            <Link to={`/search/${part.replace(/#/g, '')}`} style={{color:'rgb(250, 124, 231)'}} key={index}>
-              {part}
-            </Link>
-          );
-        }
-        return <React.Fragment key={index}> {part} </React.Fragment>;
-      });
-    
-      return <div>{renderedContent}</div>;
-    };
-
   return (
     <>
     <main className='post-page'>
@@ -145,7 +129,7 @@ const Post = () => {
               <Link to='/' className='back-home-post'><FontAwesomeIcon icon={faArrowLeft}/></Link>
               <p className='post-date'>{formatedDate}</p>
           </div>
-          <p>{renderPostContent(post?.postBody, post?.hashtags)}</p>
+          <>{renderPostContent(post?.postBody, post?.hashtags)}</>
           {post?.imgPath ? <img className='img-post' src={post?.imgPath} alt=''/> : null}
         </>}
       </section>

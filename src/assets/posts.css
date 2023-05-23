@@ -672,15 +672,15 @@ form button:disabled {
 }
 
 .author {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-right: 15px;
-    margin-top: 40px;
     color: var(--second-font);
-    font-size: .9rem;
+    position: fixed;
+    bottom: 2.5%;
+    right:  2.5%;
+    font-size: .8rem;
 }
 
 .author a {
     color: var(--second-font);
+    text-decoration: underline;
+    cursor: pointer;
 }

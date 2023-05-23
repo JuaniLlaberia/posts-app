@@ -28,7 +28,7 @@ const TrendingPage = () => {
 
     const trendToRender = trendingPosts?.map(item => {
         return (
-            <PostItem key={item.id} id={item.id} seconds={item?.data?.date?.seconds} imgPath={item?.data.imgPath} likes={item?.data?.likedBy} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
+            <PostItem key={item.id} id={item.id} hashtags={item.data.hashtags} seconds={item?.data?.date?.seconds} imgPath={item?.data.imgPath} likes={item?.data?.likedBy} photo={item.data.userPhotoURl} name={item.data.userName} body={item.data.postBody}/>
         )
     });
 
@@ -42,6 +42,6 @@ const TrendingPage = () => {
     <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>
     </>
   )
-}
+};
 
 export default TrendingPage

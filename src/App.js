@@ -25,6 +25,7 @@ function App() {
         <Route path='/search/:tag' element={<Search/>}/>
         <Route path='/*' element={<ErrorPage/>}/>
       </Routes>
+      <p className='author'>Created by <a href="https://github.com/JuaniLlaberia" target='_blank'>Juan I. Llaberia</a></p>
     </main>
   );
 }

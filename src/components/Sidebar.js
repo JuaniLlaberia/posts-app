@@ -8,6 +8,7 @@ import { faBookmark, faStar } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useThemeContext } from "../context/ThemeContext";
+import logo from '../assets/logo.png'
 
 const Sidebar = () => {
     const { logout, currentUser } = useAuthContext();
@@ -38,7 +39,7 @@ const Sidebar = () => {
     <>
       <nav className={isActive ? 'active' : ''} >
         <div className="sidebar-btns not-center">
-          <Link to='/' className='logo' onClick={() => setIsActive(false)}>PostIt</Link>
+          <Link to='/' className='logo' onClick={() => setIsActive(false)}><img src={logo} width='90px'/></Link>
           <Link to='/' onClick={() => setIsActive(false)}><FontAwesomeIcon icon={faHouse}/> Home</Link>
           <Link to='/saved' onClick={() => setIsActive(false)}><FontAwesomeIcon icon={faBookmark}/> Saved</Link>
           <Link to='/trending' onClick={() => setIsActive(false)}><FontAwesomeIcon icon={faStar}/> Popular</Link>
