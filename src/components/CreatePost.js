@@ -38,6 +38,8 @@ const CreatePost = () => {
             }
         };
 
+        const hashtagList = postText.match(/#[A-Za-z0-9]+/g).map(tag => tag.slice(1));
+
         //Creating the Post
         try {
             await addDoc(collectionPostsRef, {
@@ -53,6 +55,7 @@ const CreatePost = () => {
                 date: serverTimestamp(),
                 imgPath: filePath,
                 imgId: imageId,
+                hashtags: hashtagList,
             })
             setMessage('Post created')
         } catch(err) {

@@ -179,6 +179,42 @@ nav {
     display: none;
 }
 
+.search-modal {
+    width: 30vw;
+    min-width: 400px;
+    background-color: rgb(56, 54, 54);
+    padding: 10px;
+    border-radius: 14px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    z-index: 100;
+    box-shadow: 0 3px 7px black;
+}
+
+.search-modal input {
+    width: 20vw;
+    min-width: 250px;
+    font-size: 1rem;
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+    height: 5vh;
+}
+
+.search-modal input:focus {
+    outline: none;
+}
+
+.search-btn {
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    height: 5vh;
+    width: 5vw;
+}
+
 @media (max-width:900px) {
 
     .login-modal {
@@ -204,6 +240,24 @@ nav {
 
 .login-btns button{
     width: 40vw;
+}
+
+.search-modal {
+    width: 90vw;
+    min-width: 0;
+}
+
+.search-modal input {
+    width: 50vw;
+    min-width: 0;
+}
+
+.search-btn {
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    height: 5vh;
+    width: 3vw;
 }
 }
 

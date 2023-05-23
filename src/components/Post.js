@@ -1,7 +1,7 @@
 import { arrayUnion, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router"
 import { db, storage } from "../firebase_config";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare, faBookmark, faHeart, faShareFromSquare, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
@@ -108,6 +108,23 @@ const Post = () => {
 
     const formatedDate = formatDate(post?.date?.seconds);
 
+    const renderPostContent = (content, hashtags) => {
+      const contentParts = content.split(' ');
+    
+      const renderedContent = contentParts.map((part, index) => {
+        if (hashtags.includes(part.replace(/#/g, ''))) {
+          return (
+            <Link to={`/search/${part.replace(/#/g, '')}`} style={{color:'rgb(250, 124, 231)'}} key={index}>
+              {part}
+            </Link>
+          );
+        }
+        return <React.Fragment key={index}> {part} </React.Fragment>;
+      });
+    
+      return <div>{renderedContent}</div>;
+    };
+
   return (
     <>
     <main className='post-page'>
@@ -128,7 +145,7 @@ const Post = () => {
               <Link to='/' className='back-home-post'><FontAwesomeIcon icon={faArrowLeft}/></Link>
               <p className='post-date'>{formatedDate}</p>
           </div>
-          <p>{post?.postBody}</p>
+          <p>{renderPostContent(post?.postBody, post?.hashtags)}</p>
           {post?.imgPath ? <img className='img-post' src={post?.imgPath} alt=''/> : null}
         </>}
       </section>

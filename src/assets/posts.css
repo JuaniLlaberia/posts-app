@@ -520,7 +520,7 @@ form button:disabled {
     height: 50vh;
 }
 
-.error-page h3 {
+.error-page h3, .zero-posts {
     color: var(--main-font);
     font-size: 2.5rem;
     font-weight: 400;
@@ -530,9 +530,8 @@ form button:disabled {
     font-weight: 600;
     font-size: 3rem;
 }
-
 @media (max-width:475px) {
-    .error-page h3 {
+    .error-page h3, .zero-posts {
         font-size: 1.5rem;
     }
 

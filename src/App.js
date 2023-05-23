@@ -8,6 +8,7 @@ import MyFavs from "./components/MyFavs";
 import { useThemeContext } from "./context/ThemeContext";
 import TrendingPage from "./components/TrendingPage";
 import ErrorPage from "./components/ErrorPage";
+import Search from "./components/Search";
 
 function App() {
   const {theme} = useThemeContext();
@@ -21,6 +22,7 @@ function App() {
         <Route path='/my-posts' element={<MyPosts/>}/>
         <Route path='/saved' element={<MyFavs/>}/>
         <Route path='/trending' element={<TrendingPage/>}/>
+        <Route path='/search/:tag' element={<Search/>}/>
         <Route path='/*' element={<ErrorPage/>}/>
       </Routes>
     </main>
