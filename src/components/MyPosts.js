@@ -47,11 +47,11 @@ const MyPosts = () => {
           <h1 className='my-posts'>My Profile</h1>
           {currentUser === null ? <p className='error-login'><FontAwesomeIcon icon={faWarning} className='warning-icon'/>You must log in</p> : null}
           <div className='profile'>
-            <img src={currentUser?.photoURL} alt='user'/>
+            {currentUser !== null && <img src={currentUser?.photoURL} alt='user'/>}
             <h6>{currentUser?.displayName}</h6>
           </div>
           {currentUser && <h6 className='my-posts' style={{fontSize: '1rem'}}>My posts</h6>}
-          {isLoading && <ClipLoader color="#fa7ce7"/>}
+          {(isLoading && currentUser !== null) && <ClipLoader color="#fa7ce7"/>}
           {!isLoading && postsRender}
       </ul>
       <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>

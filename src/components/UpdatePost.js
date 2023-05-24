@@ -10,10 +10,16 @@ const UpdatePost = ({body, closeModal, id}) => {
     const handleChangePost = async e => {
         e.preventDefault()
         if(newBody.length < 1) return;
+
+        let hashtagList;
+        hashtagList = newBody.match(/#[A-Za-z0-9]+/g)?.map(tag => tag.slice(1));
+        if (hashtagList === undefined) hashtagList = [];
+
         try {
             await updateDoc(doc(db, 'posts', id), {
                 'postBody': newBody,
                 'updated': true,
+                'hashtags': hashtagList,
             })
             closeModal()
         } catch(err) {

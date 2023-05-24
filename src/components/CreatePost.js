@@ -38,7 +38,9 @@ const CreatePost = () => {
             }
         };
 
-        const hashtagList = postText.match(/#[A-Za-z0-9]+/g).map(tag => tag.slice(1));
+        let hashtagList;
+        hashtagList = postText.match(/#[A-Za-z0-9]+/g)?.map(tag => tag.slice(1));
+        if (hashtagList === undefined) hashtagList = [];
 
         //Creating the Post
         try {
@@ -57,9 +59,10 @@ const CreatePost = () => {
                 imgId: imageId,
                 hashtags: hashtagList,
             })
-            setMessage('Post created')
+            setMessage('Post created');
         } catch(err) {
-            setError('Failed to post')
+            setError('Failed to post');
+            console.log(err);
         }
         setPostText('');
         setImg(null)

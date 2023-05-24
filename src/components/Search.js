@@ -38,7 +38,7 @@ const Search = () => {
         <ul className='posts-container'>
             <h1 className='my-posts'>Posts #{tag}</h1>
             {isLoading ? <ClipLoader color='rgb(250, 124, 231)'/> : postsToRender}
-            {(posts.length < 1 && !isLoading) && <h6 className='zero-posts'>0 posts with that #</h6>}
+            {(posts.length < 1 && !isLoading) && <h6 className='zero-posts'>0 posts with this #</h6>}
         </ul>
         <Link to='/' className='back-home'><FontAwesomeIcon icon={faArrowLeft}/></Link>
         </>
